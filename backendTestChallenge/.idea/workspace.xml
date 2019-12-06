@@ -55,7 +55,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="TestNG.APITaskTests.searchForUser">
+  <component name="RunManager" selected="TestNG.APITaskTests.searchAllPostsByUserAndValidatePostIDs">
     <configuration default="true" type="JetRunConfigurationType" factoryName="Kotlin">
       <module name="backendTestChallenge" />
       <option name="VM_PARAMETERS" />
@@ -126,11 +126,11 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="APITaskTests.searchForPosts" type="TestNG" temporary="true" nameIsGenerated="true">
+    <configuration name="APITaskTests.searchAllPostsByUserAndValidatePostIDs" type="TestNG" temporary="true" nameIsGenerated="true">
       <module name="backendTestChallenge" />
       <option name="PACKAGE_NAME" value="" />
       <option name="MAIN_CLASS_NAME" value="APITaskTests" />
-      <option name="METHOD_NAME" value="searchForPosts" />
+      <option name="METHOD_NAME" value="searchAllPostsByUserAndValidatePostIDs" />
       <option name="TEST_OBJECT" value="METHOD" />
       <properties />
       <listeners />
@@ -150,11 +150,11 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="APITaskTests.validateEmail" type="TestNG" temporary="true" nameIsGenerated="true">
+    <configuration name="APITaskTests.searchUserAndValidateUserID" type="TestNG" temporary="true" nameIsGenerated="true">
       <module name="backendTestChallenge" />
       <option name="PACKAGE_NAME" value="" />
       <option name="MAIN_CLASS_NAME" value="APITaskTests" />
-      <option name="METHOD_NAME" value="validateEmail" />
+      <option name="METHOD_NAME" value="searchUserAndValidateUserID" />
       <option name="TEST_OBJECT" value="METHOD" />
       <properties />
       <listeners />
@@ -164,11 +164,11 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="TestNG.APITaskTests.searchForUser" />
-        <item itemvalue="TestNG.APITaskTests.searchForPosts" />
-        <item itemvalue="TestNG.APITaskTests" />
+        <item itemvalue="TestNG.APITaskTests.searchAllPostsByUserAndValidatePostIDs" />
         <item itemvalue="TestNG.APITaskTests.FetchCommentsAndValidateEmail" />
-        <item itemvalue="TestNG.APITaskTests.validateEmail" />
+        <item itemvalue="TestNG.APITaskTests.searchUserAndValidateUserID" />
+        <item itemvalue="TestNG.APITaskTests" />
+        <item itemvalue="TestNG.APITaskTests.searchForUser" />
       </list>
     </recent_temporary>
   </component>

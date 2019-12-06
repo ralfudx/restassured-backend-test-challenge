@@ -32,27 +32,53 @@ public class APITaskTests {
     }
 
 
-    //Search for the user and return the user ID
-    public String searchForUser() {
+    //helper function to search for user
+    private String searchForUser() {
         String userId = "";
         String response = given().
                 get("/users").then().extract().asString();
-        List list = from(response).getList("findAll { it.username.equals(\"Samantha\") }.id");
-        if (!list.isEmpty()) {
-            userId = list.get(0).toString();
+        List usernameId = from(response).getList("findAll { it.username.equals(\"Samantha\") }.id");
+        if (!usernameId.isEmpty()) {
+            userId = usernameId.get(0).toString();
         }
         return userId;
     }
 
-    //Use the user ID fetched to make a search for all the posts written by the user
+    //helper function to search for posts
     private List<String> searchForPosts(){
-        //String userId = searchForUser();
-        List <String> postIds = new ArrayList<String>();
+        String userId = searchForUser();
+        List <String> postIds;
         String response = given().
                 get("/posts").then().extract().asString();
-        //postIds = from(response).getList(String.format("findAll { it.userId.equals(%s) }.id", userId));
+        postIds = from(response).getList(String.format("findAll { it.userId.equals(%s) }.id", userId));
         return postIds;
     }
+
+    //Search for the user and return the user ID
+    @Test
+    public void searchUserAndValidateUserID(){
+        String userId = searchForUser();
+        if (userId == "" || userId == null) {
+            Assert.assertFalse(userId == "");
+            Assert.assertFalse(userId == null);
+        }
+    }
+
+
+    //Use the user ID fetched to make a search for all the posts written by the user
+    @Test
+    public void searchAllPostsByUserAndValidatePostIDs(){
+        List <String> postIds = searchForPosts();
+        if (postIds == null){
+            Assert.assertFalse(postIds == null);
+        }
+        if(postIds.isEmpty()){
+            //This ensures that the test does NOT fail for a user without any post - simply print a message
+            System.out.println("User has no posts yet!.... PostIds: " + postIds);
+            Assert.assertTrue(postIds.isEmpty());
+        }
+    }
+
 
     //Fetch the comments for each post by the user and validate if the emails in the comment section are in the proper format
     @Test
@@ -61,16 +87,20 @@ public class APITaskTests {
         String number = "";
         List userPostIds = searchForPosts();
 
-        for (int i = 0; i < userPostIds.size(); i++){
+        //check to see that the user has posts before iterating (in case user has no posts)
+        if(!userPostIds.isEmpty()) {
+            for (int i = 0; i < userPostIds.size(); i++) {
                 number = userPostIds.get(i).toString();
                 String response = given().
-                        get("/comments?postId="+ number).then().extract().asString();
+                        get("/comments?postId=" + number).then().extract().asString();
+
                 //check for emails with invalid format
                 List inValidEmails = from(response).getList(String.format("findAll { !it.email.matches(%s)}.email", regex));
-                if(!inValidEmails.isEmpty()){
+                if (!inValidEmails.isEmpty()) {
                     System.out.printf("The InValid email(s) for post Id: %s is/are %s%n", number, inValidEmails.toString());
-                    Assert.assertTrue(!inValidEmails.isEmpty());
+                    Assert.assertTrue(inValidEmails.isEmpty());
                 }
+            }
         }
     }
 
