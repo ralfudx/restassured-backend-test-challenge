@@ -5,7 +5,9 @@ import io.restassured.http.ContentType;
 import io.restassured.path.json.JsonPath;
 import io.restassured.specification.ResponseSpecification;
 import org.testng.annotations.BeforeClass;
+import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
+import org.testng.Assert;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -31,9 +33,10 @@ public class APITaskTests {
 
 
     //Search for the user and return the user ID
-    private String searchForUser() {
+    public String searchForUser() {
         String userId = "";
-        String response = get("/users").asString();
+        String response = given().
+                get("/users").then().extract().asString();
         List list = from(response).getList("findAll { it.username.equals(\"Samantha\") }.id");
         if (!list.isEmpty()) {
             userId = list.get(0).toString();
@@ -43,18 +46,32 @@ public class APITaskTests {
 
     //Use the user ID fetched to make a search for all the posts written by the user
     private List<String> searchForPosts(){
-        String userId = searchForUser();
+        //String userId = searchForUser();
         List <String> postIds = new ArrayList<String>();
-        String response = get("/posts").asString();
-        postIds = from(response).getList(String.format("findAll { it.userId.equals(%s) }.id", userId));
+        String response = given().
+                get("/posts").then().extract().asString();
+        //postIds = from(response).getList(String.format("findAll { it.userId.equals(%s) }.id", userId));
         return postIds;
     }
 
+    //Fetch the comments for each post by the user and validate if the emails in the comment section are in the proper format
     @Test
     public void FetchCommentsAndValidateEmail(){
-        System.out.println("Finally.. " + searchForPosts());
+        String regex = "/^[\\w-_\\.+]*[\\w-_\\.]\\@([\\w]+\\.)+[\\w]+[\\w]$/";
+        String number = "";
+        List userPostIds = searchForPosts();
 
-        //For each post, fetch the comments and validate if the emails in the comment section are in the proper format
+        for (int i = 0; i < userPostIds.size(); i++){
+                number = userPostIds.get(i).toString();
+                String response = given().
+                        get("/comments?postId="+ number).then().extract().asString();
+                //check for emails with invalid format
+                List inValidEmails = from(response).getList(String.format("findAll { !it.email.matches(%s)}.email", regex));
+                if(!inValidEmails.isEmpty()){
+                    System.out.printf("The InValid email(s) for post Id: %s is/are %s%n", number, inValidEmails.toString());
+                    Assert.assertTrue(!inValidEmails.isEmpty());
+                }
+        }
     }
 
 }

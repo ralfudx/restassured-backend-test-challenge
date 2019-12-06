@@ -4,7 +4,6 @@
     <list default="true" id="285dc668-8af5-4ca5-b12b-aacb943b460e" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/test/java/APITaskTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/APITaskTests.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/API_Test" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/target/test-classes/APITaskTests.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/test-classes/APITaskTests.class" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -56,7 +55,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="TestNG.APITaskTests.FetchCommentsAndValidateEmail">
+  <component name="RunManager" selected="TestNG.APITaskTests.searchForUser">
     <configuration default="true" type="JetRunConfigurationType" factoryName="Kotlin">
       <module name="backendTestChallenge" />
       <option name="VM_PARAMETERS" />
@@ -127,11 +126,11 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="APITaskTests.getAllCountries" type="TestNG" temporary="true" nameIsGenerated="true">
+    <configuration name="APITaskTests.searchForPosts" type="TestNG" temporary="true" nameIsGenerated="true">
       <module name="backendTestChallenge" />
       <option name="PACKAGE_NAME" value="" />
       <option name="MAIN_CLASS_NAME" value="APITaskTests" />
-      <option name="METHOD_NAME" value="getAllCountries" />
+      <option name="METHOD_NAME" value="searchForPosts" />
       <option name="TEST_OBJECT" value="METHOD" />
       <properties />
       <listeners />
@@ -139,11 +138,11 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="APITaskTests.getAllUsers" type="TestNG" temporary="true" nameIsGenerated="true">
+    <configuration name="APITaskTests.searchForUser" type="TestNG" temporary="true" nameIsGenerated="true">
       <module name="backendTestChallenge" />
       <option name="PACKAGE_NAME" value="" />
       <option name="MAIN_CLASS_NAME" value="APITaskTests" />
-      <option name="METHOD_NAME" value="getAllUsers" />
+      <option name="METHOD_NAME" value="searchForUser" />
       <option name="TEST_OBJECT" value="METHOD" />
       <properties />
       <listeners />
@@ -165,11 +164,11 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="TestNG.APITaskTests.FetchCommentsAndValidateEmail" />
+        <item itemvalue="TestNG.APITaskTests.searchForUser" />
+        <item itemvalue="TestNG.APITaskTests.searchForPosts" />
         <item itemvalue="TestNG.APITaskTests" />
+        <item itemvalue="TestNG.APITaskTests.FetchCommentsAndValidateEmail" />
         <item itemvalue="TestNG.APITaskTests.validateEmail" />
-        <item itemvalue="TestNG.APITaskTests.getAllUsers" />
-        <item itemvalue="TestNG.APITaskTests.getAllCountries" />
       </list>
     </recent_temporary>
   </component>
