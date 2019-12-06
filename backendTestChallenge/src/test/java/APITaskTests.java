@@ -2,10 +2,12 @@
 import io.restassured.RestAssured;
 import io.restassured.builder.ResponseSpecBuilder;
 import io.restassured.http.ContentType;
+import io.restassured.path.json.JsonPath;
 import io.restassured.specification.ResponseSpecification;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
@@ -28,35 +30,31 @@ public class APITaskTests {
     }
 
 
-    private String searchForUserID(String username) {
+    //Search for the user and return the user ID
+    private String searchForUser() {
         String userId = "";
         String response = get("/users").asString();
-        List list = from(response).getList("findAll { it.username.equals(username) }.id");
+        List list = from(response).getList("findAll { it.username.equals(\"Samantha\") }.id");
         if (!list.isEmpty()) {
-            System.out.println(list.get(0));
-            System.out.printf("Cover/%s/all%n", list.get(0));
             userId = list.get(0).toString();
         }
         return userId;
+    }
 
-        //Search for the user
-        //Use the details fetched to make a search for the posts written by the user
-        //For each post, fetch the comments and validate if the emails in the comment section are in the proper format
+    //Use the user ID fetched to make a search for all the posts written by the user
+    private List<String> searchForPosts(){
+        String userId = searchForUser();
+        List <String> postIds = new ArrayList<String>();
+        String response = get("/posts").asString();
+        postIds = from(response).getList(String.format("findAll { it.userId.equals(%s) }.id", userId));
+        return postIds;
     }
 
     @Test
-    public void validateEmail(){
-        System.out.println("Finally.. " + searchForUserID("Samantha"));
+    public void FetchCommentsAndValidateEmail(){
+        System.out.println("Finally.. " + searchForPosts());
+
+        //For each post, fetch the comments and validate if the emails in the comment section are in the proper format
     }
 
-    //@Test
-    public void getAllCountries() {
-                given().
-                        get("https://jsonplaceholder.typicode.com/users").
-                        then().
-                        statusCode(200).
-                        contentType(ContentType.JSON).
-                        body("username", equalTo("Samantha"), "id");
-                //body("username", hasItems("Antonette", "Samantha", "Leopoldo_Corkery"));
-    }
 }
