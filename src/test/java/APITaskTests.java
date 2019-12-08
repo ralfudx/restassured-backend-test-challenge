@@ -1,24 +1,13 @@
-
-import io.restassured.RestAssured;
 import io.restassured.builder.ResponseSpecBuilder;
 import io.restassured.http.ContentType;
-import io.restassured.path.json.JsonPath;
-import io.restassured.specification.ResponseSpecification;
-import org.testng.annotations.BeforeClass;
-import org.testng.annotations.Parameters;
-import org.testng.annotations.Test;
 import org.testng.Assert;
+import org.testng.annotations.BeforeClass;
+import org.testng.annotations.Test;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 
 import static io.restassured.RestAssured.*;
 import static io.restassured.path.json.JsonPath.from;
-import static org.hamcrest.Matchers.*;
-import io.restassured.builder.RequestSpecBuilder;
-import io.restassured.response.Response;
-import io.restassured.specification.RequestSpecification;
 
 public class APITaskTests {
 
@@ -105,3 +94,4 @@ public class APITaskTests {
     }
 
 }
+
