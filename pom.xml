@@ -17,6 +17,7 @@
         <jackson.version>2.10.1</jackson.version>
         <commonslang.version>3.9</commonslang.version>
         <log4jcore.version>2.12.1</log4jcore.version>
+        <surefire.version>3.0.0-M4</surefire.version>
     </properties>
 
     <dependencies>
@@ -81,7 +82,23 @@
             <artifactId>log4j-core</artifactId>
             <version>${log4jcore.version}</version>
         </dependency>
+        <dependency>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-surefire-report-plugin</artifactId>
+            <version>${surefire.version}</version>
+            <type>maven-plugin</type>
+        </dependency>
     </dependencies>
+
+    <reporting>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-report-plugin</artifactId>
+                <version>${surefire.version}</version>
+            </plugin>
+        </plugins>
+    </reporting>
 
 
 </project>
